@@ -1,0 +1,9 @@
+export const GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';
+export const GET_PRODUCTS_REQUEST_SUCCESS = 'GET_PRODUCTS_REQUEST_SUCCESS';
+export const GET_PRODUCTS_REQUEST_FAIL = 'GET_PRODUCTS_REQUEST_FAIL';
+
+export function getProductsAction() {
+  return {
+    type: GET_PRODUCTS_REQUEST,
+  };
+}
