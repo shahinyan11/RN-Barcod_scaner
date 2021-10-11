@@ -17,7 +17,6 @@ class Index extends React.Component<Props, State> {
     this.state = {
       error: null,
       allOrders: null,
-      navigationState: new NavigationStateHere(),
     };
   }
 
@@ -75,7 +74,7 @@ class Index extends React.Component<Props, State> {
       <OrderDetails
         order={order}
         pickList={null}
-        exit={this.showOrdersScreen}
+        exit={this.props.navigation}
       />
     );
   };
@@ -85,10 +84,6 @@ class Index extends React.Component<Props, State> {
       navigationState: new NavigationStateHere(),
     });
   };
-  showOrderDetailsScreen = (order: Order) => {
-    this.setState({
-      navigationState: new NavigationStateOrderDetails(order),
-    });
   };
 
   // render() {
