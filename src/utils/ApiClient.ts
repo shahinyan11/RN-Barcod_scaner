@@ -1,9 +1,9 @@
-import axios from 'axios';
-// import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 // import {logout} from '../redux/Dispatchers';
+import {createLogger} from './Logger';
 import {environment} from './Environment';
 
-// const logger = createLogger('ApiClient.ts');
+const logger = createLogger('ApiClient.ts');
 
 const apiClient = axios.create({
   baseURL: environment.API_BASE_URL,

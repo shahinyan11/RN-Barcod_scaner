@@ -20,15 +20,15 @@ export interface DispatchProps {
   ) => void;
   searchProductByCodeAction: (
     productCode: string,
-    callback: (searchedProducts: any) => void,
+    callback: (data: any) => void,
   ) => void;
   searchProductGloballyAction: (
     value: string,
-    callback: (searchedProducts: any) => void,
+    callback: (data: any) => void,
   ) => void;
   searchProductSByCategoryAction: (
     category: any,
-    callback: (searchedProducts: any) => void,
+    callback: (data: any) => void,
   ) => void;
 }
 

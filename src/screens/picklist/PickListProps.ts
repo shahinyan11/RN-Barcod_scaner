@@ -1,5 +1,5 @@
-import Item from "../../../data/picklist/Item";
-import Order from "../../../data/order/Order";
+import Item from "../../data/picklist/Item";
+import Order from "../../data/order/Order";
 
 export  interface PickListProps{
   exit: () => void

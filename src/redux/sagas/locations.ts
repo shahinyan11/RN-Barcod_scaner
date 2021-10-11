@@ -11,12 +11,12 @@ import {
 function* getLocations(action: any) {
   try {
     yield showScreenLoading('Fetching locations');
-    const data = yield call(api.getLocations);
+    const response = yield call(api.getLocations);
     yield put({
       type: GET_LOCATIONS_REQUEST_SUCCESS,
-      payload: data,
+      payload: response.data,
     });
-    yield action.payload.callback(data);
+    yield action.callback(response.data);
     yield hideScreenLoading();
   } catch (e) {
     console.log('function* getLocations', e);

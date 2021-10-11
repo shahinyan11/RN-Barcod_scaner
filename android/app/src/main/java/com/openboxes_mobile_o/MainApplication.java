@@ -1,4 +1,4 @@
-package com.openboxes_mobile_o;
+package com.openboxes.android;
 
 import android.app.Application;
 import android.content.Context;

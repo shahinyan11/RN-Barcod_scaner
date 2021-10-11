@@ -1,7 +1,7 @@
-import {EnvironmentActual} from "./EnvironmentActual";
+import {EnvironmentActual} from './EnvironmentActual';
 
 export interface Environment {
-  API_BASE_URL: string
+  API_BASE_URL: string;
 }
 
-export const environment = EnvironmentActual
+export const environment = EnvironmentActual;

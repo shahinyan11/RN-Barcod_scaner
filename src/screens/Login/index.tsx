@@ -89,7 +89,7 @@ class Login extends Component<Props, State> {
 
   login = (username: string, password: string) => {
     try {
-      this.props.login({data: {username, password}});
+      this.props.login({username, password});
     } catch (e) {
       showPopup({message: e.message ?? 'Login failed'});
     }

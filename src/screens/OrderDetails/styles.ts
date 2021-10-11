@@ -2,6 +2,11 @@ import {StyleSheet} from 'react-native';
 import Theme from '../../utils/Theme';
 
 export default StyleSheet.create({
+  screenContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+  },
   contentContainer: {
     display: 'flex',
     flex: 1,

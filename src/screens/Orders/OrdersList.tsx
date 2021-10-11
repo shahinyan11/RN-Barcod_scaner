@@ -1,40 +1,38 @@
-import {FlatList, ListRenderItemInfo, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import React, {ReactElement} from "react";
-import Theme from "../../../utils/Theme";
-import {createLogger} from "../../../utils/Logger";
-import Order from "../../../data/order/Order";
-
-const logger = createLogger("OrdersList")
+import {
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {ReactElement} from 'react';
+import Theme from '../../utils/Theme';
+import {Order} from '../../data/order/Order';
 
 export interface Props {
-  orders: Order[] | null
-  onOrderTapped: (order: Order) => void
+  orders: Order[] | null;
+  onOrderTapped: (order: Order) => void;
 }
 
 export default function OrdersList(props: Props) {
-  return (
-    props.orders
-      ?
-      <FlatList
-        data={props.orders}
-        renderItem={(item: ListRenderItemInfo<Order>) => renderOrder(item.item, () => props.onOrderTapped(item.item))}
-        keyExtractor={order => order.id}
-        style={styles.list}
-      />
-      :
-      null
-  )
+  return props.orders ? (
+    <FlatList
+      data={props.orders}
+      renderItem={(item: ListRenderItemInfo<Order>) =>
+        renderOrder(item.item, () => props.onOrderTapped(item.item))
+      }
+      keyExtractor={order => order.id}
+      style={styles.list}
+    />
+  ) : null;
 }
 
-function renderOrder(
-  order: Order,
-  onOrderTapped: () => void
-): ReactElement {
+function renderOrder(order: Order, onOrderTapped: () => void): ReactElement {
   return (
     <TouchableOpacity
       style={styles.listItemContainer}
-      onPress={() => onOrderTapped()}
-    >
+      onPress={() => onOrderTapped()}>
       <View style={styles.row}>
         <View style={styles.col50}>
           <Text style={styles.label}>Identifire</Text>
@@ -66,75 +64,74 @@ function renderOrder(
         </View>
       </View>
     </TouchableOpacity>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   list: {
-    width: "100%"
+    width: '100%',
   },
   listItemContainer: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     flex: 1,
     borderRadius: Theme.roundness,
     borderColor: Theme.colors.backdrop,
     borderWidth: 1,
     margin: 4,
     padding: 4,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   listItemNameContainer: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     flex: 0,
     marginStart: 4,
   },
   listItemNameLabel: {
     fontSize: 12,
-    color: Theme.colors.placeholder
+    color: Theme.colors.placeholder,
   },
   listItemName: {
     fontSize: 16,
-    color: Theme.colors.text
+    color: Theme.colors.text,
   },
   listItemCategoryContainer: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     flex: 0,
     marginStart: 4,
-    marginTop: 4
+    marginTop: 4,
   },
   listItemCategoryLabel: {
     fontSize: 12,
-    color: Theme.colors.placeholder
+    color: Theme.colors.placeholder,
   },
   listItemCategory: {
     fontSize: 16,
-    color: Theme.colors.text
+    color: Theme.colors.text,
   },
   row: {
     flexDirection: 'row',
-    borderColor: Theme.colors.onBackground,
+    borderColor: Theme.colors.background,
     // borderBottomWidth: 1,
     marginTop: 1,
     padding: 2,
-    width: '100%'
+    width: '100%',
   },
   col50: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     flex: 0,
     marginStart: 4,
-    width: "50%"
-
+    width: '50%',
   },
   label: {
     fontSize: 12,
-    color: Theme.colors.placeholder
+    color: Theme.colors.placeholder,
   },
   value: {
     fontSize: 16,
-    color: Theme.colors.text
-  }
-})
+    color: Theme.colors.text,
+  },
+});

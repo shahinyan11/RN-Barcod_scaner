@@ -1,9 +1,9 @@
-import Person from "../../../data/picklist/Person";
-import Requisition from "../../../data/picklist/Requisition";
-import Product from "../../../data/product/Product";
-import BinLocation from "../../../data/picklist/BinLocation";
-import Item from "../../../data/picklist/Item";
-import Order from "../../../data/order/Order";
+import Person from "../../data/picklist/Person";
+import Requisition from "../../data/picklist/Requisition";
+import Product from "../../data/product/Product";
+import BinLocation from "../../data/picklist/BinLocation";
+import Item from "../../data/picklist/Item";
+import Order from "../../data/order/Order";
 
 export interface PickListVm {
   header: string

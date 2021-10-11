@@ -1,5 +1,4 @@
 import Product from '../../data/product/Product';
-import {NavigationState} from './State';
 
 export interface VM {
   barcodeNo: string;
@@ -10,5 +9,4 @@ export interface VM {
   list: Product[] | null;
   floatingActionButtonVisible: boolean;
   centralErrorMessage: string | null;
-  navigationState: NavigationState;
 }

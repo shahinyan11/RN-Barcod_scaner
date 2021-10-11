@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './styles';
-import {RootState} from '../../redux/reducers';
 import Location from '../../data/location/Location';
 import _, {Dictionary} from 'lodash';
 import {ScrollView, View} from 'react-native';
@@ -184,10 +183,6 @@ class ChooseCurrentLocation extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  //no-op
-});
-
 const mapDispatchToProps: DispatchProps = {
   getLocationsAction,
   setCurrentLocationAction,
@@ -195,7 +190,4 @@ const mapDispatchToProps: DispatchProps = {
   hideScreenLoading,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ChooseCurrentLocation);
+export default connect(null, mapDispatchToProps)(ChooseCurrentLocation);

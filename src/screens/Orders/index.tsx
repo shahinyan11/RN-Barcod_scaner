@@ -3,13 +3,12 @@ import styles from './styles';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 import showPopup from '../../components/Popup';
-import getOrdersFromApi from '../../data/order/GetOrders';
 import {DispatchProps, State, Props} from './Types';
 import OrdersList from './OrdersList';
-import Order from '../../data/order/Order';
-import CentralMessage from '../products/CentralMessage';
+import {Order} from '../../data/order/Order';
 import Header from '../../components/Header';
-import OrderDetails from '../order_details/OrderDetails';
+import {getOrdersAction} from '../../redux/actions/orders';
+import {showScreenLoading, hideScreenLoading} from '../../redux/actions/main';
 
 class Index extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -21,82 +20,55 @@ class Index extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    (async () => {
-      const products = await this.getOrders();
-      if (!products) {
-        this.props.exit();
-        return;
-      }
-
-      if (products.length == 0) {
-        this.setState({
-          error: 'No products found',
-          allOrders: products,
+    const actionCallback = (data: any) => {
+      if (data?.error) {
+        showPopup({
+          title: data.error.message ? 'Failed to fetch products' : null,
+          message: data.error.message ?? 'Failed to fetch products',
+          positiveButton: {
+            text: 'Retry',
+            callback: () => {
+              this.props.getOrdersAction(actionCallback);
+            },
+          },
+          negativeButtonText: 'Cancel',
         });
       } else {
-        this.setState({
-          error: null,
-          allOrders: products,
-        });
+        // if (!data) {
+        //   this.props.exit();
+        //   return;
+        // }
+        if (data.length == 0) {
+          this.setState({
+            error: 'No products found',
+            allOrders: data,
+          });
+        } else {
+          this.setState({
+            error: null,
+            allOrders: data,
+          });
+        }
       }
-    })();
+
+      this.props.hideScreenLoading();
+    };
+    this.props.getOrdersAction(actionCallback);
   }
-
-  getOrders = async (): Promise<Order[] | null> => {
-    try {
-      this.props.showProgressBar('Fetching products');
-      return await getOrdersFromApi();
-    } catch (e) {
-      const title = e.message ? 'Failed to fetch products' : null;
-      const message = e.message ?? 'Failed to fetch products';
-      const shouldRetry = await showPopup({
-        title: title,
-        message: message,
-        positiveButtonText: 'Retry',
-        negativeButtonText: 'Cancel',
-      });
-      if (shouldRetry) {
-        return await this.getOrders();
-      } else {
-        return Promise.resolve(null);
-      }
-    } finally {
-      this.props.hideProgressBar();
-    }
-  };
 
   onBackButtonPress = () => {
     this.props.exit();
   };
 
-  renderOrderDetailsScreen = (order: Order) => {
-    return (
-      <OrderDetails
-        order={order}
-        pickList={null}
-        exit={this.props.navigation}
-      />
-    );
-  };
-
-  showOrdersScreen = () => {
-    this.setState({
-      navigationState: new NavigationStateHere(),
+  goToOrderDetailsScreen = (order: Order) => {
+    this.props.navigation.navigate('OrderDetails', {
+      order: order,
+      pickList: null,
+      exit: () => {
+        this.props.navigation.navigate('Orders');
+      },
     });
   };
-  };
-
-  // render() {
-  //   const vm = this.state;
-  //   switch (this.state.navigationState.type) {
-  //     case NavigationStateType.Here:
-  //       return this.renderContent();
-  //     case NavigationStateType.OrderDetails:
-  //       const navigationStateOrderDetails =
-  //         vm.navigationState as NavigationStateOrderDetails;
-  //       return this.renderOrderDetailsScreen(navigationStateOrderDetails.order);
-  //   }
-  // }
 
   render() {
     return (
@@ -110,7 +82,7 @@ class Index extends React.Component<Props, State> {
         <View style={styles.content}>
           <OrdersList
             orders={this.state.allOrders}
-            onOrderTapped={this.props.navigation.navigate('OrderDetails')}
+            onOrderTapped={this.goToOrderDetailsScreen}
           />
           {/*<CentralMessage message={this.state.centralErrorMessage}/>*/}
         </View>
@@ -119,6 +91,10 @@ class Index extends React.Component<Props, State> {
   }
 }
 
-const mapDispatchToProps: DispatchProps = {};
+const mapDispatchToProps: DispatchProps = {
+  getOrdersAction,
+  showScreenLoading,
+  hideScreenLoading,
+};
 
 export default connect(null, mapDispatchToProps)(Index);

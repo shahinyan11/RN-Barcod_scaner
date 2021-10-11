@@ -1,4 +1,4 @@
-package com.openboxes_mobile_o;
+package com.openboxes.android;
 
 import com.facebook.react.ReactActivity;
 

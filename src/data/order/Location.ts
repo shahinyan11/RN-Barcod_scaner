@@ -1,4 +1,4 @@
 export default interface Location {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
