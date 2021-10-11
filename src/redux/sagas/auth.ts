@@ -1,8 +1,5 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
-import {
-  LOGIN_REQUEST,
-  LOGIN_REQUEST_SUCCESS,
-} from '../actions/auth';
+import {LOGIN_REQUEST, LOGIN_REQUEST_SUCCESS} from '../actions/auth';
 
 import * as api from '../../apis';
 import {hideScreenLoading, showScreenLoading} from '../actions/main';

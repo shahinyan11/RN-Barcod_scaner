@@ -1,15 +1,9 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-// import {
-//   dispatchHideProgressBarAction as hideProgressBar,
-//   dispatchShowProgressBarAction as showProgressBar,
-// } from '../../../redux/Dispatchers';
-import {connect} from 'react-redux';
+import {Image, ScrollView, Text, View} from 'react-native';
+import styles from './styles';
 import Header from '../../components/Header';
-import {DispatchProps, OwnProps, Props, StateProps} from './Props';
-import {State} from './State';
+import {Props, State} from './Types';
 import {vmMapper} from './VMMapper';
-import Theme from '../../utils/Theme';
 
 class ProductDetails extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -119,7 +113,7 @@ class ProductDetails extends React.Component<Props, State> {
               </View>
               {vm.attributes.map(item => {
                 return (
-                  <View key={item.code} style={styles.row}>
+                  <View key={`${item.code}`} style={styles.row}>
                     <Text style={styles.label}>{item.name}</Text>
                     <Text style={styles.value}>{item.value}</Text>
                   </View>
@@ -165,112 +159,4 @@ class ProductDetails extends React.Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    padding: 8,
-  },
-  name: {
-    fontSize: 17,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-  },
-  boxHeading: {
-    fontSize: 15,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-    marginTop: 8,
-  },
-  box: {
-    borderColor: Theme.colors.onBackground,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginTop: 8,
-    padding: 8,
-  },
-  descriptionLabel: {
-    fontSize: 20,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-    marginTop: 8,
-  },
-  descriptionText: {
-    fontSize: 16,
-    color: Theme.colors.text,
-    borderColor: Theme.colors.onBackground,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginTop: 8,
-    padding: 8,
-  },
-  detailsLabel: {
-    fontSize: 20,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-    marginTop: 8,
-  },
-  detailsContainer: {
-    padding: 8,
-    borderColor: Theme.colors.onBackground,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginTop: 8,
-  },
-  detailsItemContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 0,
-  },
-  detailsItemName: {
-    fontSize: 16,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-  },
-  detailsItemValue: {
-    fontSize: 16,
-    color: Theme.colors.text,
-    marginStart: 8,
-  },
-  container: {
-    flexWrap: 'wrap',
-    alignItems: 'flex-start', // if you want to fill rows left to right
-    borderColor: Theme.colors.onBackground,
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-  row: {
-    flexDirection: 'row',
-    borderColor: Theme.colors.onBackground,
-    borderBottomWidth: 1,
-    marginTop: 8,
-    padding: 8,
-    width: '100%',
-  },
-  label: {
-    width: '50%', // is 50% of container width
-  },
-  value: {
-    width: '50%', // is 50% of container width
-    textAlign: 'right',
-  },
-  textAlign: {
-    textAlign: 'right',
-  },
-  tinyLogo: {
-    width: '100%',
-    height: '20%',
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  },
-});
-
-const mapDispatchToProps: DispatchProps = {
-  // showProgressBar,
-  // hideProgressBar,
-};
-
-export default connect(null, mapDispatchToProps)(ProductDetails);
+export default ProductDetails;

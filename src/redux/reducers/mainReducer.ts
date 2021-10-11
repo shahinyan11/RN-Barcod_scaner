@@ -1,6 +1,8 @@
 import Location from '../../data/location/Location';
 import {Session} from '../../data/auth/Session';
 import {SHOW_SCREEN_LOADING, HIDE_SCREEN_LOADING} from '../actions/main';
+import {SET_CURRENT_LOCATION_REQUEST_SUCCESS} from '../actions/locations';
+import {LOGIN_REQUEST_SUCCESS} from '../actions/auth';
 
 export interface AppState {
   loggedIn: boolean;
@@ -24,6 +26,12 @@ const initialState: AppState = {
 
 function reducer(state = initialState, action: any) {
   switch (action.type) {
+    case LOGIN_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        loggedIn: true,
+      };
+    }
     case SHOW_SCREEN_LOADING: {
       const {message} = action.payload;
       return {
@@ -41,6 +49,12 @@ function reducer(state = initialState, action: any) {
           visible: false,
           message: null,
         },
+      };
+    }
+    case SET_CURRENT_LOCATION_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        currentLocation: action.payload,
       };
     }
 

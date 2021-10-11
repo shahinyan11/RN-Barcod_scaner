@@ -10,7 +10,6 @@ import {
 import React, {ReactElement} from 'react';
 import Theme from '../../utils/Theme';
 
-
 export interface Props {
   products: Product[] | null;
   onProductTapped: (product: Product) => void;

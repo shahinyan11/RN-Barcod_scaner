@@ -1,16 +1,19 @@
+import Product from '../../data/product/Product';
+
 export interface OwnProps {
   exit: () => void;
-  navigation: any;
+  product: Product;
 }
 
 export interface StateProps {
-  products: any;
+  //no-op
 }
 
 export interface DispatchProps {
   showProgressBar: (message?: string) => void;
   hideProgressBar: () => void;
-  getProductsAction: () => void;
 }
 
 export type Props = OwnProps & StateProps & DispatchProps;
+
+export interface State {}

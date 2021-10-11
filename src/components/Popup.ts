@@ -3,7 +3,7 @@ import {Alert, AlertButton} from 'react-native';
 export interface PopupParams {
   message: string;
   title?: string | null;
-  positiveButtonText?: string;
+  positiveButton?: any;
   negativeButtonText?: string;
 }
 
@@ -16,8 +16,10 @@ export default function showPopup(params: PopupParams) {
     });
   }
   buttons.push({
-    text: params.positiveButtonText ?? 'Ok',
-    onPress: () => {},
+    text: params.positiveButton?.text ?? 'Ok',
+    onPress: () => {
+      params.positiveButton.callback() || null;
+    },
   });
   Alert.alert(params.title ?? '', params.message, buttons, {
     cancelable: false,

@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {connect} from 'react-redux';
-import {auth} from '../../redux/actions/auth';
+import {login} from '../../redux/actions/auth';
 import showPopup from '../../components/Popup';
-// import {auth} from '../../data/auth/Login';
 import {TextInput} from 'react-native-paper';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -24,7 +23,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  auth: (data: any) => void;
+  login: (data: any) => void;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
@@ -88,7 +87,7 @@ class Login extends Component<Props, State> {
     return null;
   };
 
-  auth = (username: string, password: string) => {
+  login = (username: string, password: string) => {
     try {
       this.props.login({data: {username, password}});
     } catch (e) {
@@ -133,7 +132,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: DispatchProps = {
-  login: auth,
+  login,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

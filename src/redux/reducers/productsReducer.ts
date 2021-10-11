@@ -1,7 +1,7 @@
 import {GET_PRODUCTS_REQUEST_SUCCESS} from '../actions/products';
 
 const initialState = {
-  products: [6],
+  products: [],
 };
 
 function reducer(state = initialState, action: any) {
