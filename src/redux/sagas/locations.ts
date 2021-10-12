@@ -30,11 +30,15 @@ function* getLocations(action: any) {
 function* setCurrentLocation(action: any) {
   try {
     yield showScreenLoading('Setting current location');
-    const data = yield call(api.setCurrentLocation, action.payload.location);
+    const response = yield call(
+      api.setCurrentLocation,
+      action.payload.location,
+    );
     yield put({
       type: SET_CURRENT_LOCATION_REQUEST_SUCCESS,
-      payload: data,
+      payload: action.payload.location,
     });
+    yield action.callback(action.payload.location);
     yield hideScreenLoading();
   } catch (e) {
     yield hideScreenLoading();

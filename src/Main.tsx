@@ -5,8 +5,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from './screens/Login';
 import Orders from './screens/Orders';
+import OrderDetails from './screens/OrderDetails';
 import ProductDetails from './screens/ProductDetails';
+import Dashboard from './screens/Dashboard';
+import Products from './screens/Products';
 import ChooseCurrentLocation from './screens/ChooseCurrentLocation';
+import PickOrderItem from './screens/PickList';
 import FullScreenLoadingIndicator from './components/FullScreenLoadingIndicator';
 import {RootState} from './redux/reducers';
 import {connect} from 'react-redux';
@@ -92,11 +96,9 @@ class Main extends Component<Props, State> {
           visible={this.props.fullScreenLoadingIndicator.visible}
           message={this.props.fullScreenLoadingIndicator.message}
         />
-        <NavigationContainer
-          ref={NavigationService.navigationRef}
-        >
+        <NavigationContainer ref={NavigationService.navigationRef}>
           <Stack.Navigator
-            initialRouteName={loggedIn ? 'Login' : ChooseCurrentLocation}
+            initialRouteName={loggedIn ? 'Login' : 'ChooseCurrentLocation'}
             screenOptions={{headerShown: false}}>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen
@@ -104,7 +106,11 @@ class Main extends Component<Props, State> {
               component={ChooseCurrentLocation}
             />
             <Stack.Screen name="Orders" component={Orders} />
+            <Stack.Screen name="OrderDetails" component={OrderDetails} />
             <Stack.Screen name="ProductDetails" component={ProductDetails} />
+            <Stack.Screen name="PickOrderItem" component={PickOrderItem} />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Products" component={Products} />
             {/*<Stack.Screen name="Drawer" component={DrawerNavigator} />*/}
             {/*<Stack.Screen name="Drawer" component={DrawerNavigator} />*/}
           </Stack.Navigator>

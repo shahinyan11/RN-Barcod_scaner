@@ -18,7 +18,9 @@ export default function showPopup(params: PopupParams) {
   buttons.push({
     text: params.positiveButton?.text ?? 'Ok',
     onPress: () => {
-      params.positiveButton.callback() || null;
+      if (params.positiveButton.callback) {
+        params.positiveButton.callback();
+      }
     },
   });
   Alert.alert(params.title ?? '', params.message, buttons, {

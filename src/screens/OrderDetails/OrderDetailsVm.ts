@@ -1,18 +1,18 @@
-import Person from "../../data/picklist/Person";
-import Requisition from "../../data/picklist/Requisition";
-import Product from "../../data/product/Product";
-import BinLocation from "../../data/picklist/BinLocation";
-import Item from "../../data/picklist/Item";
+import Person from '../../data/picklist/Person';
+import Requisition from '../../data/picklist/Requisition';
+// import Product from '../../data/product/Product';
+// import BinLocation from '../../data/picklist/BinLocation';
+import {Item} from '../../data/picklist/Item';
 
 export interface OrderDetailsVm {
-  header: string
-  id: string,
-  name: string,
-  description: string,
-  picker: Person,
-  datePicked: Date,
-  requisition: Requisition
-  picklistItems: Item[]
+  header: string;
+  id: string;
+  name: string;
+  description: string;
+  picker: Person;
+  datePicked: Date;
+  requisition: Requisition;
+  picklistItems: Item[];
 }
 
 // export interface RequisitionVm{

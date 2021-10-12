@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import Header from '../../components/Header';
 import styles from './styles';
 // import Header from '../../components/Header';
 import {connect} from 'react-redux';
@@ -12,10 +13,12 @@ class Dashboard extends React.Component<Props, State> {
   render() {
     return (
       <View style={styles.screenContainer}>
-        {/*<Header title="Dashboard" backButtonVisible={false} />*/}
+        <Header title="Dashboard" backButtonVisible={false} />
         <TouchableOpacity
           style={styles.countContainer}
-          onPress={this.props.navigation.navigate('Products')}>
+          onPress={() => {
+            this.props.navigation.navigate('Products');
+          }}>
           <View style={styles.countLabelAndIconContainer}>
             {/*<Icon name={Name.Boxes} size={14} />*/}
             <Text style={styles.countLabel}>Products</Text>
@@ -23,7 +26,9 @@ class Dashboard extends React.Component<Props, State> {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.countContainer}
-          onPress={this.props.navigation.navigate('Order')}>
+          onPress={() => {
+            this.props.navigation.navigate('Orders');
+          }}>
           <View style={styles.countLabelAndIconContainer}>
             {/*<Icon name={Name.Boxes} size={14} />*/}
             <Text style={styles.countLabel}>Orders</Text>

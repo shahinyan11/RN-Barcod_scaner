@@ -1,31 +1,10 @@
 import React from 'react';
-import {PickListProps, Props} from './PickListProps';
-import {State} from './State';
-import {orderDetailsVMMapper} from '../OrderDetails/OrderDetailsVMMapper';
-import ScreenContainer from '../../ScreenContainer';
-import Header from '../../Header';
-import {
-  FlatList,
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Item from '../../data/picklist/Item';
+import {State, DispatchProps, Props} from './types';
+import styles from './styles';
+import Header from '../../components/Header';
+import {Text, TextInput, View} from 'react-native';
 import {pickListVMMapper} from './PickListVMMapper';
-import Theme from '../../utils/Theme';
-import {
-  DispatchProps,
-  PicklistOwnProps,
-} from '../OrderDetails/OrderDetailsProps';
-import {
-  dispatchHideProgressBarAction as hideProgressBar,
-  dispatchShowProgressBarAction as showProgressBar,
-} from '../../redux/Dispatchers';
-import {AppState} from '../../redux/Reducer';
-import {StateProps} from '../ProductDetails/Props';
+import {showScreenLoading, hideScreenLoading} from '../../redux/actions/main';
 import {connect} from 'react-redux';
 
 class PickOrderItem extends React.Component<Props, State> {
@@ -39,13 +18,14 @@ class PickOrderItem extends React.Component<Props, State> {
   }
 
   render() {
-    const vm = pickListVMMapper(this.props, this.state);
+    const vm = pickListVMMapper(this.props.route.params, this.state);
+    console.log(333333, this.props.route.params)
     return (
-      <ScreenContainer>
+      <View style={styles.screenContainer}>
         <Header
           title={vm.header}
           backButtonVisible={true}
-          onBackButtonPress={this.props.exit}
+          // onBackButtonPress={this.props.exit}
         />
         <View style={styles.contentContainer}>
           <Text style={styles.name}>{vm.picklistItems.product.name}</Text>
@@ -81,61 +61,13 @@ class PickOrderItem extends React.Component<Props, State> {
             </View>
           </View>
         </View>
-      </ScreenContainer>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    padding: 8,
-  },
-  name: {
-    fontSize: 17,
-    color: Theme.colors.text,
-    fontWeight: 'bold',
-  },
-  row: {
-    flexDirection: 'row',
-    borderColor: Theme.colors.onBackground,
-    // borderBottomWidth: 1,
-    marginTop: 1,
-    padding: 2,
-    width: '100%',
-  },
-  col50: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 0,
-    marginStart: 4,
-    width: '50%',
-  },
-  label: {
-    fontSize: 12,
-    color: Theme.colors.placeholder,
-  },
-  value: {
-    fontSize: 16,
-    color: Theme.colors.text,
-  },
-  textInput: {
-    fontSize: 16,
-    color: Theme.colors.text,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#e7edd8',
-  },
-});
-
 const mapDispatchToProps: DispatchProps = {
-  showProgressBar,
-  hideProgressBar,
+  showScreenLoading,
+  hideScreenLoading,
 };
-const mapStateToProps = (state: AppState): StateProps => ({});
-export default connect<StateProps, DispatchProps, PickListProps, AppState>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PickOrderItem);
+export default connect(null, mapDispatchToProps)(PickOrderItem);

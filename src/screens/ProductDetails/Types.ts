@@ -3,6 +3,8 @@ import Product from '../../data/product/Product';
 export interface OwnProps {
   exit: () => void;
   product: Product;
+  route: any;
+  navigation: any;
 }
 
 export interface StateProps {

@@ -62,7 +62,7 @@ class Index extends React.Component<Props, State> {
 
   goToOrderDetailsScreen = (order: Order) => {
     this.props.navigation.navigate('OrderDetails', {
-      order: order,
+      order,
       pickList: null,
       exit: () => {
         this.props.navigation.navigate('Orders');

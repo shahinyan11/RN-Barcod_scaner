@@ -29,24 +29,23 @@ const apiClient = axios.create({
 //   return request;
 // };
 
-// const handleApiSuccess = (response: AxiosResponse) => {
-//   const url = response.config.url;
-//   const headers = response.config.headers;
-//   const params = response.config.params;
-//   const responseHeaders = response.headers;
-//   const responseBody: string = JSON.stringify(response.data);
-//   logger.d(`handleApiSuccess: url = ${JSON.stringify(
-//     url,
-//   )}, headers = ${JSON.stringify(headers)},
-//   params = ${JSON.stringify(params)}, responseHeaders = ${JSON.stringify(
-//     responseHeaders,
-//   )},
-//   responseBody = ${responseBody}`);
-//   return JSON.parse(responseBody);
-// };
-//
+const handleApiSuccess = (response: AxiosResponse) => {
+  // const url = response.config.url;
+  // const headers = response.config.headers;
+  // const params = response.config.params;
+  // const responseHeaders = response.headers;
+  const responseBody: string = JSON.stringify(response.data);
+  // logger.d(`handleApiSuccess: url = ${JSON.stringify(
+  //   url,
+  // )}, headers = ${JSON.stringify(headers)},
+  // params = ${JSON.stringify(params)}, responseHeaders = ${JSON.stringify(
+  //   responseHeaders,
+  // )},
+  // responseBody = ${responseBody}`);
+  return JSON.parse(responseBody);
+};
+
 // const handleApiFailure = async (error: AxiosError): Promise<ApiError> => {
-//   console.log(11111111, error.response?.data)
 //   let message = error.response?.data?.errorMessage;
 //   const code = error.response?.status;
 //   logger.d(`handleApiFailure: code = ${code}, message = ${message}`);
@@ -76,4 +75,5 @@ const apiClient = axios.create({
 
 // apiClient.interceptors.request.use(handleApiRequest);
 // apiClient.interceptors.response.use(handleApiSuccess, handleApiFailure);
+apiClient.interceptors.response.use(handleApiSuccess);
 export default apiClient;

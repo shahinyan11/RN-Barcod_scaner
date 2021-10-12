@@ -1,6 +1,6 @@
 import Person from "./Person";
 import Requisition from "./Requisition";
-import Item from "./Item";
+import {Item} from "./Item";
 
 export default interface PickList{
   id: string,

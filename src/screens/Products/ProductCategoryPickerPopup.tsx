@@ -40,11 +40,7 @@ export default class ProductCategoryPickerPopup extends React.Component<
     this.resetState = this.resetState.bind(this);
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<Props>,
-    prevState: Readonly<State>,
-    snapshot?: any,
-  ) {
+  componentDidUpdate(prevProps: Readonly<Props>) {
     if (!prevProps.visible && this.props.visible) {
       (async () => {
         try {
@@ -92,7 +88,7 @@ export default class ProductCategoryPickerPopup extends React.Component<
         <Text style={styles.listItem}>{item.item.name}</Text>
         <View
           style={{
-            borderBottomColor: Theme.colors.onBackground,
+            borderBottomColor: Theme.colors.background,
             borderBottomWidth: 0,
           }}
         />

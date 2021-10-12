@@ -16,7 +16,7 @@ import {
 const NO_ORGANIZATION_NAME = 'No organization';
 
 export interface OwnProps {
-  //no-op
+  navigation: any;
 }
 
 interface StateProps {
@@ -119,26 +119,34 @@ class ChooseCurrentLocation extends React.Component<Props, State> {
   setCurrentLocation = async (orgName: string, location: Location) => {
     showPopup({
       message: `Do you want to select current location as ${location.name}?`,
-      positiveButton: {text: 'Yes'},
+      positiveButton: {
+        text: 'Yes',
+        callback: () => {
+          const actionCallback = (data: any) => {
+            if (data?.error) {
+              showPopup({
+                message: 'Failed to set current location',
+                positiveButton: {
+                  text: 'Try Again',
+                  callback: () => {
+                    this.props.setCurrentLocationAction(
+                      location,
+                      actionCallback,
+                    );
+                  },
+                },
+                negativeButtonText: 'Cancel',
+              });
+            } else {
+              this.props.navigation.navigate('Dashboard');
+            }
+          };
+
+          this.props.setCurrentLocationAction(location, actionCallback);
+        },
+      },
       negativeButtonText: 'No',
     });
-
-    const actionCallback = (data: any) => {
-      if (data?.error) {
-        showPopup({
-          message: 'Failed to set current location',
-          positiveButton: {
-            text: 'Try Again',
-            callback: () => {
-              this.props.setCurrentLocationAction(location, actionCallback);
-            },
-          },
-          negativeButtonText: 'Cancel',
-        });
-      }
-    };
-
-    this.props.setCurrentLocationAction(location, actionCallback);
   };
 
   render() {

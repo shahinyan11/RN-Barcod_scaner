@@ -18,12 +18,12 @@ import {hideScreenLoading, showScreenLoading} from '../actions/main';
 function* getProducts(action: any) {
   try {
     yield showScreenLoading('Fetching products');
-    const data = yield call(api.getProducts);
+    const response = yield call(api.getProducts);
     yield put({
       type: GET_PRODUCTS_REQUEST_SUCCESS,
-      payload: data,
+      payload: response.data,
     });
-    yield action.callback(data);
+    yield action.callback(response.data);
     yield hideScreenLoading();
   } catch (e) {
     console.log('function* getProducts', e.message);

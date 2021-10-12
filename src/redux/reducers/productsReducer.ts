@@ -9,7 +9,7 @@ function reducer(state = initialState, action: any) {
     case GET_PRODUCTS_REQUEST_SUCCESS: {
       return {
         ...state,
-        products: [...action.payload.data],
+        // products: [...action.payload.data],
       };
     }
 

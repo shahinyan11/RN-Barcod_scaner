@@ -56,6 +56,7 @@ class Products extends React.Component<Types, State> {
           negativeButtonText: 'Cancel',
         });
       } else {
+        console.log(333333333, data);
         if (data.length === 0) {
           this.setState({
             error: 'No products found',
@@ -368,7 +369,9 @@ class Products extends React.Component<Types, State> {
         <View style={styles.content}>
           <ProductsList
             products={vm.list}
-            onProductTapped={this.props.navigation.navigate('ProductDetails')}
+            onProductTapped={product => {
+              this.props.navigation.navigate('ProductDetails', {product});
+            }}
           />
           <CentralMessage message={vm.centralErrorMessage} />
           <FloatingActionButtonMenu

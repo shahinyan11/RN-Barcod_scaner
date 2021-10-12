@@ -1,6 +1,6 @@
 import PickList from "./PickList";
 import apiClient from "../../utils/ApiClient";
-import Item from "./Item";
+import {Item} from "./Item";
 
 const url = "/stockMovements/"
 

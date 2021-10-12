@@ -1,7 +1,9 @@
 import apiClient from '../utils/ApiClient';
 
-const url = '/stockMovements?exclude=lineItems&direction=OUTBOUND';
-
 export function getOrders() {
-  return apiClient.get(url);
+  return apiClient.get('/stockMovements?exclude=lineItems&direction=OUTBOUND');
+}
+
+export function getPickList(id: string) {
+  return apiClient.get(`/stockMovements/${id}/stockMovementItems`);
 }
